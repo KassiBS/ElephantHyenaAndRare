@@ -4,39 +4,104 @@ using UnityEngine;
 
 public class MovingCamera : MonoBehaviour
 {
-    private Rigidbody2D rbC;
-    bool followP = false;
-    public List<GameObject> fBound;
+    /*private Rigidbody2D rbC;
+    bool followP = true;
     Transform cam;
+    float camY;
     Transform player;
+    public CapsuleCollider2D cap;
+    public PolygonCollider2D poly;
+    bool slow;*/
+    public List<GameObject> fBound;
+    Transform player;
+
+    Vector3 worldPos;
+    bool noLoop = false;
 
     // Start is called before the first frame update
     void Start()
     {
+        player = GameObject.FindWithTag("Player").transform;
+        /*cap = GetComponent<CapsuleCollider2D>();
+        poly = GetComponent<PolygonCollider2D>();
         rbC = GetComponent<Rigidbody2D>();
         cam = GetComponent<Transform>();
-        player = GameObject.FindWithTag("Player").transform;
-        fBound.Add(GameObject.FindWithTag(""));
-    }
+        camY = cam.position.y;
+        player = GameObject.FindWithTag("Player").transform;*/
+}
 
-    // Update is called once per frame
-    void Update()
+// Update is called once per frame
+void Update()
     {
-        if (followP == true)
+        transform.rotation = Quaternion.identity;
+        if (noLoop == true && transform.position != GetComponentInParent<Transform>().position)
         {
-            cam.transform.Translate(player.transform.position); //player.transform.position.x, player.transform.position.y, player.transform.position.z
+            transform.position = worldPos;
         }
-    }
-
-    private void OnTriggerEnter(Collider other)
-    {
-        if (followP == false)
+        if (noLoop == true && transform.localPosition.x < player.transform.position.x + 0.1f && transform.localPosition.x > player.transform.position.x - 0.1f)
         {
-            followP = true;
+            Debug.Log("Evil");
+            this.transform.SetParent(player.gameObject.GetComponent<Transform>());
+            StartCoroutine(NOSTOP());
+        }
+        /*if (followP == true)
+        {
+            //Debug.Log("Following player");
+            cam.transform.position = (new Vector3(player.position.x, Mathf.Clamp(player.position.y, camY, player.position.y), cam.position.z)); //Mathf.Clamp(player.transform.position.y, camY, player.transform.position.y)
         }
         else
         {
-            followP = false;
+            cam.transform.Translate(0,0,0);
+        }*/
+    }
+
+    private IEnumerator OnTriggerStay2D(Collider2D other)
+    {
+        if (other.tag == "Bounds" && transform.parent == player && noLoop == false)
+        {
+            Debug.Log("Woagh");
+            transform.SetParent(null);
+            //worldPos = new Vector3(GetComponentInParent<Transform>().position.x, GetComponentInParent<Transform>().position.y, -1);
+            //Debug.Log(worldPos);
+            yield return new WaitForSeconds(0.1f);
+            noLoop = true;
         }
     }
+
+    private IEnumerator NOSTOP()
+    {
+        yield return new WaitForSeconds(0.5f);
+        noLoop = false;
+    }
+
+    /*private IEnumerator OnTriggerEnter2D(Collider2D other)
+    {
+        if (followP == true && other.tag == "Bounds")
+        {
+            Debug.Log("Collided with boundary");
+            foreach (GameObject i in fBound)
+            {
+                if (other.gameObject == i)
+                {
+                    if (cap.enabled == true)
+                    {
+                        cap.enabled = false;
+                    }
+                    if (poly.enabled == true)
+                    {
+                        poly.enabled = false;
+                    }
+                    followP = false;
+                }
+            }
+        }
+        else if (followP == false)
+        {
+            followP = true;
+            yield return new WaitForSeconds(5);
+
+            cap.enabled = true;
+            poly.enabled = true;
+        }
+    }*/
 }
