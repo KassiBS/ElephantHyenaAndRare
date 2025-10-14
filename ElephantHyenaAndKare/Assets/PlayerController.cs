@@ -22,11 +22,7 @@ public class PlayerController : MonoBehaviour
     private void FixedUpdate()
     {
         rb.velocity = new Vector2(move * moveSpd, Mathf.Clamp(rb.velocity.y, -10000, 0));
-    }
 
-    // Update is called once per frame
-    void Update()
-    {
         if (rb.velocity.x > 1)
             leftMove = false;
         else if (rb.velocity.x < -1)
@@ -34,12 +30,18 @@ public class PlayerController : MonoBehaviour
 
         GetComponent<SpriteRenderer>().flipX = leftMove;
 
-        move = Input.GetAxisRaw("Horizontal")*Time.deltaTime;
+        move = Input.GetAxisRaw("Horizontal") * Time.deltaTime;
 
         if (ground == false)
         {
-            transform.Translate(Vector2.down * Time.deltaTime*2);
+            transform.Translate(Vector2.down * Time.deltaTime * 1f);
         }
+    }
+
+    // Update is called once per frame
+    void Update()
+    {
+        //Debug.Log(rb.velocity);
     }
 
     private void OnCollisionExit2D(Collision2D collision)
