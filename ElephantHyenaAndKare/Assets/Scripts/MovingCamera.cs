@@ -34,11 +34,11 @@ public class MovingCamera : MonoBehaviour
 void Update()
     {
         transform.rotation = Quaternion.identity;
-        if (noLoop == true && transform.position != GetComponentInParent<Transform>().position)
+        if (transform.position != GetComponentInParent<Transform>().position) //noloop true
         {
             transform.position = worldPos;
         }
-        if (noLoop == true && transform.localPosition.x < player.transform.position.x + 0.1f && transform.localPosition.x > player.transform.position.x - 0.1f)
+        if (noLoop == true && transform.position.x < player.transform.position.x + 0.1f && transform.position.x > player.transform.position.x - 0.1f) //noloop true
         {
             Debug.Log("Evil");
             this.transform.SetParent(player.gameObject.GetComponent<Transform>());
@@ -70,7 +70,7 @@ void Update()
 
     private IEnumerator NOSTOP()
     {
-        yield return new WaitForSeconds(0.5f);
+        yield return new WaitForSeconds(0.2f);
         noLoop = false;
     }
 
