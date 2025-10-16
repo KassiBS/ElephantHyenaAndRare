@@ -7754,11 +7754,11 @@ GameObject:
   m_Component:
   - component: {fileID: 587043837}
   - component: {fileID: 587043836}
-  - component: {fileID: 587043831}
   - component: {fileID: 587043834}
   - component: {fileID: 587043833}
   - component: {fileID: 587043832}
   - component: {fileID: 587043830}
+  - component: {fileID: 587043838}
   m_Layer: 0
   m_Name: Elephant
   m_TagString: Player
@@ -7785,7 +7785,7 @@ MonoBehaviour:
     m_Events:
     - m_PersistentCalls:
         m_Calls:
-        - m_Target: {fileID: 587043831}
+        - m_Target: {fileID: 0}
           m_TargetAssemblyTypeName: PlayerController, Assembly-CSharp
           m_MethodName: NoMove
           m_Mode: 6
@@ -7799,7 +7799,7 @@ MonoBehaviour:
           m_CallState: 2
     - m_PersistentCalls:
         m_Calls:
-        - m_Target: {fileID: 587043831}
+        - m_Target: {fileID: 0}
           m_TargetAssemblyTypeName: PlayerController, Assembly-CSharp
           m_MethodName: NoMove
           m_Mode: 6
@@ -7811,6 +7811,7 @@ MonoBehaviour:
             m_StringArgument: 
             m_BoolArgument: 1
           m_CallState: 2
+<<<<<<< Updated upstream
 --- !u!114 &587043831
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7830,6 +7831,8 @@ MonoBehaviour:
   camCol: {fileID: 1882045027}
   capCol: {fileID: 1465992740}
   nextTrig: {fileID: 0}
+=======
+>>>>>>> Stashed changes
 --- !u!95 &587043832
 Animator:
   serializedVersion: 5
@@ -7958,7 +7961,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 587043829}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -16.96, y: -3.97, z: 2}
+  m_LocalPosition: {x: -17.07, y: -3.99, z: 2}
   m_LocalScale: {x: 5, y: 5, z: 5}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -7966,6 +7969,23 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &587043838
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 587043829}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 13562f8f13d92934a97e92081ce2b9c5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  moveSpd: 150
+  leftMove: 0
+  camCol: {fileID: 1882045027}
+  capCol: {fileID: 1465992740}
+  nextTrig: {fileID: 0}
 --- !u!1 &1048630975
 GameObject:
   m_ObjectHideFlags: 0
@@ -8092,7 +8112,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1048630975}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 50.14, y: 3.25, z: 0.028616905}
+  m_LocalPosition: {x: 50.14, y: 3.08, z: 0.028616905}
   m_LocalScale: {x: 1, y: 10.181379, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
