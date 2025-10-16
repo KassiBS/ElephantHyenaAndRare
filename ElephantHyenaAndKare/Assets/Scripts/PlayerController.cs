@@ -11,8 +11,8 @@ public class PlayerController : MonoBehaviour
     private bool ground = true;
     private bool noMove = false;
 
-    private Rigidbody2D rb;
-    private Animator anim;
+    public Rigidbody2D rb;
+    public Animator anim;
     public BoxCollider2D camCol;
     public CapsuleCollider2D capCol;
     public NextCutscene nextTrig;
@@ -23,7 +23,8 @@ public class PlayerController : MonoBehaviour
         nextTrig = GameObject.FindWithTag("Bird").GetComponent<NextCutscene>();
         leftMove = false;
         noMove = false;
-        rb = GetComponent<Rigidbody2D>();
+        rb = this.GetComponent<Rigidbody2D>();
+        Debug.Log("Player Controller Active");
         anim = gameObject.GetComponent<Animator>();
         anim.SetBool("Walking", false);
 
@@ -120,8 +121,8 @@ public class PlayerController : MonoBehaviour
         anim.Play("Drinking");
         yield return new WaitForSecondsRealtime(1.9f);
         anim.Play("Idle");
-        nextTrig.Drank();
         noMove = false;
+        nextTrig.Drank();
     }
 
     public IEnumerator TrunkInteract()

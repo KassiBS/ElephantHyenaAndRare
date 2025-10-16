@@ -292,8 +292,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   moveSpd: 150
   leftMove: 0
+  rb: {fileID: 5549985}
+  anim: {fileID: 5549986}
   camCol: {fileID: 1882045027}
   capCol: {fileID: 1465992740}
+  nextTrig: {fileID: 0}
 --- !u!1 &101384983
 GameObject:
   m_ObjectHideFlags: 0
@@ -7822,8 +7825,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   moveSpd: 150
   leftMove: 0
-  camCol: {fileID: 0}
-  capCol: {fileID: 0}
+  rb: {fileID: 587043833}
+  anim: {fileID: 587043832}
+  camCol: {fileID: 1882045027}
+  capCol: {fileID: 1465992740}
+  nextTrig: {fileID: 0}
 --- !u!95 &587043832
 Animator:
   serializedVersion: 5
