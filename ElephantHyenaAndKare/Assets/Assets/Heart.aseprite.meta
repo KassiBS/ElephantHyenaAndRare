@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 90864ed673164f149a1aed5d21564112
+guid: a605a0089af5937479eb75cc102b0cc4
 ScriptedImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -119,18 +119,18 @@ ScriptedImporter:
     tessellationDetail: 0
     uvTransform: {x: 0, y: 0}
   animatedSpriteImportData:
-  - name: Speech _Bubble
+  - name: Heart
     originalName: 
-    pivot: {x: 0.5, y: 0}
+    pivot: {x: 0.5555556, y: -0.5}
     alignment: 9
     border: {x: 0, y: 0, z: 0, w: 0}
     rect:
       serializedVersion: 2
       x: 4
       y: 4
-      width: 32
-      height: 31
-    spriteID: e47fa483ec609db42800eaada19e1a83
+      width: 9
+      height: 8
+    spriteID: b2e3755178e8df540ac0818a0de9c7d7
     spriteBone: []
     spriteOutline: []
     vertices: []
@@ -142,21 +142,21 @@ ScriptedImporter:
   spriteSheetImportData: []
   asepriteLayers:
   - layerIndex: 0
-    guid: -1773270495
-    name: Speech _Bubble
+    guid: 1260111146
+    name: Heart
     layerFlags: 0
     layerType: 0
     blendMode: 0
     cells:
-    - name: Speech _Bubble
+    - name: Heart
       frameIndex: 0
       additiveSortOrder: 0
       cellRect:
-        x: 0
-        y: 0
-        width: 32
-        height: 31
-      spriteId: e47fa483ec609db42800eaada19e1a83
+        x: 3
+        y: 4
+        width: 9
+        height: 8
+      spriteId: b2e3755178e8df540ac0818a0de9c7d7
     linkedCells: []
     parentIndex: -1
   platformSettings:
@@ -174,4 +174,4 @@ ScriptedImporter:
   generatePhysicsShape: 0
   secondarySpriteTextures: []
   spritePackingTag: 
-  canvasSize: {x: 32, y: 32}
+  canvasSize: {x: 16, y: 16}
