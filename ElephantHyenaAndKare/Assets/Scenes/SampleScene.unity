@@ -14887,8 +14887,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   moveSpd: 150
   leftMove: 0
+<<<<<<< Updated upstream
   rb: {fileID: 0}
   anim: {fileID: 0}
+=======
+>>>>>>> Stashed changes
   camCol: {fileID: 1800572529}
   capCol: {fileID: 1269862119}
   nextTrig: {fileID: 1245929028}
