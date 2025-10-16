@@ -20,6 +20,7 @@ public class PlayerController : MonoBehaviour
     void Start()
     {
         leftMove = false;
+        noMove = false;
         rb = GetComponent<Rigidbody2D>();
         anim = gameObject.GetComponent<Animator>();
         anim.SetBool("Walking", false);
@@ -129,5 +130,10 @@ public class PlayerController : MonoBehaviour
         yield return new WaitForSecondsRealtime(0.69f);
         anim.Play("Idle");
         noMove = false;
+    }
+
+    public void NoMove(bool x)
+    {
+        noMove = x;
     }
 }
