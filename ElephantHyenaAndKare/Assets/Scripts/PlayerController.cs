@@ -15,10 +15,12 @@ public class PlayerController : MonoBehaviour
     private Animator anim;
     public BoxCollider2D camCol;
     public CapsuleCollider2D capCol;
+    public NextCutscene nextTrig;
 
     // Start is called before the first frame update
     void Start()
     {
+        nextTrig = GameObject.FindWithTag("Bird").GetComponent<NextCutscene>();
         leftMove = false;
         noMove = false;
         rb = GetComponent<Rigidbody2D>();
@@ -118,6 +120,7 @@ public class PlayerController : MonoBehaviour
         anim.Play("Drinking");
         yield return new WaitForSecondsRealtime(1.9f);
         anim.Play("Idle");
+        nextTrig.Drank();
         noMove = false;
     }
 
