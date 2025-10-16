@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Runtime.CompilerServices;
 using UnityEditor.Animations;
 using UnityEngine;
 
@@ -80,6 +81,7 @@ public class PlayerController : MonoBehaviour
         {
             transform.Translate(Vector2.down * Time.deltaTime * 1f);
         }
+
     }
 
     private void OnCollisionExit2D(Collision2D collision)
@@ -139,5 +141,13 @@ public class PlayerController : MonoBehaviour
     public void NoMove(bool x)
     {
         noMove = x;
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.CompareTag("Pickup") && collision.gameObject.activeSelf)
+        {
+           collision.gameObject.SetActive(false);
+        }
     }
 }

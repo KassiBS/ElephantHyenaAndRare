@@ -7831,6 +7831,9 @@ MonoBehaviour:
   camCol: {fileID: 1882045027}
   capCol: {fileID: 1465992740}
   nextTrig: {fileID: 0}
+<<<<<<< Updated upstream
+=======
+>>>>>>> Stashed changes
 =======
 >>>>>>> Stashed changes
 --- !u!95 &587043832
