@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Bounds
   - Box
+  - Bird
   layers:
   - Default
   - TransparentFX

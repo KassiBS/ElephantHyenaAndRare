@@ -39,4 +39,15 @@ public class NextCutscene : MonoBehaviour
     {
         trigger.enabled = x;
     }
+
+    public void Drink()
+    {
+        trigger.enabled = true;
+        trigger.isTrigger = false;
+    }
+
+    public void Drank()
+    {
+        trigger.isTrigger = true;
+    }
 }
