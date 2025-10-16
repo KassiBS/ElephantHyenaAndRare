@@ -16,6 +16,11 @@ ScriptedImporter:
   - first:
       type: UnityEngine:AnimationClip
       assembly: UnityEngine.AnimationModule
+      name: IdleB
+    second: {fileID: 7400000, guid: f21401d1c9095734f92b3e7b80656345, type: 2}
+  - first:
+      type: UnityEngine:AnimationClip
+      assembly: UnityEngine.AnimationModule
       name: Shock
     second: {fileID: 7400000, guid: 7d5dffe6440c2104484ea5a64f6eaf78, type: 2}
   serializedVersion: 2
@@ -110,7 +115,7 @@ ScriptedImporter:
     addSortingGroup: 1
     addShadowCasters: 0
   importFileNodeState: 1
-  platformSettingsDirtyTick: 638962094587941839
+  platformSettingsDirtyTick: 638962186102113508
   textureAssetName: 
   singleSpriteImportData:
   - name: 
