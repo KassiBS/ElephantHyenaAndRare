@@ -45,7 +45,7 @@ public class KeyboardButtons : MonoBehaviour
             }
         }
 
-        if (Input.GetKey(KeyCode.A) || Input.GetKeyUp(KeyCode.LeftArrow))
+        if (Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.LeftArrow))
         {
             animL.Play("ArrowLeftPress", -1, 0.5f);
             animL.speed = 0;
@@ -55,7 +55,7 @@ public class KeyboardButtons : MonoBehaviour
             animR.speed = 0;
             //animS.speed = 0;
         }
-        else if (Input.GetKey(KeyCode.D) || Input.GetKeyUp(KeyCode.RightArrow))
+        else if (Input.GetKey(KeyCode.D) || Input.GetKey(KeyCode.RightArrow))
         {
             animR.Play("ArrowRightPress", -1, 0.5f);
             animR.speed = 0;
