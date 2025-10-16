@@ -9,12 +9,12 @@ public class PlayerController : MonoBehaviour
     float move;
     public bool leftMove = false;
     private bool ground = true;
+    private bool noMove = false;
 
     private Rigidbody2D rb;
     private Animator anim;
     public BoxCollider2D camCol;
-    public BoxCollider2D boxCol;
-    public List<GameObject> colliders;
+    public CapsuleCollider2D capCol;
 
     // Start is called before the first frame update
     void Start()
@@ -28,50 +28,49 @@ public class PlayerController : MonoBehaviour
         anim.SetBool("Push_Walk", false);
 
         camCol = transform.GetChild(0).GetComponent<BoxCollider2D>();
-        boxCol = GameObject.FindWithTag("Box").GetComponent<BoxCollider2D>();
-        Physics2D.IgnoreCollision(camCol, boxCol, true);
-        foreach (GameObject i in colliders)
-        {
-            Physics2D.IgnoreCollision(camCol, i.GetComponent<BoxCollider2D>(), true);
-        }
+        capCol = GameObject.FindWithTag("Box").GetComponent<CapsuleCollider2D>();
+        Physics2D.IgnoreCollision(camCol, capCol, true);
     }
 
     private void FixedUpdate()
     {
-        rb.velocity = new Vector2(move * moveSpd, Mathf.Clamp(rb.velocity.y, -10000, 0));
-        anim.speed = 1;
-
-        if (rb.velocity.x > 1)
+        if (noMove == false)
         {
-            leftMove = false;
-            if (anim.GetBool("Push_Walk") == false)
-                anim.SetBool("Walking", true);
+            rb.velocity = new Vector2(move * moveSpd, Mathf.Clamp(rb.velocity.y, -10000, 0));
+            anim.speed = 1;
+
+            if (rb.velocity.x > 1)
+            {
+                leftMove = false;
+                if (anim.GetBool("Push_Walk") == false)
+                    anim.SetBool("Walking", true);
+                else
+                {
+                    anim.SetBool("Walking", false);
+                    anim.SetBool("Push_Walk", true);
+                }
+            }
+            else if (rb.velocity.x < -1)
+            {
+                leftMove = true;
+                if (anim.GetBool("Push_Walk") == false)
+                    anim.SetBool("Walking", true);
+                else
+                {
+                    anim.SetBool("Walking", false);
+                    anim.SetBool("Push_Walk", true);
+                }
+            }
             else
             {
                 anim.SetBool("Walking", false);
-                anim.SetBool("Push_Walk", true);
+                anim.SetBool("Push_Walk", false);
             }
-        }
-        else if (rb.velocity.x < -1)
-        {
-            leftMove = true;
-            if (anim.GetBool("Push_Walk") == false)
-                anim.SetBool("Walking", true);
-            else
-            {
-                anim.SetBool("Walking", false);
-                anim.SetBool("Push_Walk", true);
-            }
-        }
-        else
-        {
-            anim.SetBool("Walking", false);
-            anim.SetBool("Push_Walk", false);
-        }
 
-        GetComponent<SpriteRenderer>().flipX = leftMove;
+            GetComponent<SpriteRenderer>().flipX = leftMove;
 
-        move = Input.GetAxisRaw("Horizontal") * Time.deltaTime;
+            move = Input.GetAxisRaw("Horizontal") * Time.deltaTime;
+        }
 
         if (ground == false)
         {
@@ -108,5 +107,27 @@ public class PlayerController : MonoBehaviour
                 anim.speed = 1;
             }
         }
+    }
+
+    public IEnumerator DrinkWater()
+    {
+        noMove = true;
+        rb.velocity = new Vector2(0,0);
+        anim.speed = 1;
+        anim.Play("Drinking");
+        yield return new WaitForSecondsRealtime(1.9f);
+        anim.Play("Idle");
+        noMove = false;
+    }
+
+    public IEnumerator TrunkInteract()
+    {
+        noMove = true;
+        rb.velocity = new Vector2(0, 0);
+        anim.speed = 1;
+        anim.Play("Interact");
+        yield return new WaitForSecondsRealtime(0.69f);
+        anim.Play("Idle");
+        noMove = false;
     }
 }
