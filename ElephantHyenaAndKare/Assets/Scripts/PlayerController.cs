@@ -91,7 +91,7 @@ public class PlayerController : MonoBehaviour
     private void OnCollisionStay2D(Collision2D collision)
     {
         ground = true;
-        //Debug.Log("Collided!" + collision.gameObject.name);
+        Debug.Log("Collided!" + collision.gameObject.name);
         if (collision.gameObject.tag == "Box")
         {
             if (rb.velocity.x !< 1 && rb.velocity.x !> -1)
