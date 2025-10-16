@@ -5,6 +5,11 @@ TagManager:
   serializedVersion: 2
   tags:
   - Bounds
+<<<<<<< Updated upstream
+=======
+  - Box
+  - Audio
+>>>>>>> Stashed changes
   layers:
   - Default
   - TransparentFX
