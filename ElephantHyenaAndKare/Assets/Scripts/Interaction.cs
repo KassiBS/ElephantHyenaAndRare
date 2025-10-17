@@ -10,6 +10,7 @@ public class Interaction : MonoBehaviour
     private void Start()
     {
         pc = GameObject.FindWithTag("Player").GetComponent<PlayerController>();
+        z_Interacted = false;
     }
 
     private void OnTriggerStay2D(Collider2D collidedObject)

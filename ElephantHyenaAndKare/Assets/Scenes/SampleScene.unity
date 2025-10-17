@@ -433,7 +433,7 @@ Transform:
   m_GameObject: {fileID: 223679756}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -0.006, y: 0.169, z: 0}
-  m_LocalScale: {x: 0.14442527, y: 0.14442527, z: 0.14442527}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1712324465}
@@ -480,15 +480,15 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 0}
-  m_Color: {r: 0.45882353, g: 0.7372549, b: 1, a: 1}
+  m_Sprite: {fileID: -5788597393437692957, guid: 63f2e5ae2909d8943ac92cb1a77b8cd6, type: 3}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 1, y: 1}
+  m_Size: {x: 0.09, y: 0.13}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
-  m_WasSpriteAssigned: 0
+  m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
 --- !u!1 &333114228
@@ -13635,6 +13635,7 @@ MonoBehaviour:
     m_Signals:
     - {fileID: 11400000, guid: 1011d92f57206824dad6d9edccbed649, type: 2}
     - {fileID: 11400000, guid: 104d39fd654f6a5479e00da52bfbce00, type: 2}
+    - {fileID: 11400000, guid: 60bda93faaea5f64faf9477dd2cabdca, type: 2}
     m_Events:
     - m_PersistentCalls:
         m_Calls:
@@ -13663,6 +13664,20 @@ MonoBehaviour:
             m_FloatArgument: 0
             m_StringArgument: 
             m_BoolArgument: 1
+          m_CallState: 2
+    - m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 1800572526}
+          m_TargetAssemblyTypeName: PlayerController, Assembly-CSharp
+          m_MethodName: NewScene
+          m_Mode: 3
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 1
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
           m_CallState: 2
 --- !u!114 &1800572533
 MonoBehaviour:
@@ -14293,7 +14308,7 @@ PlayableDirector:
   m_GameObject: {fileID: 1952664818}
   m_Enabled: 1
   serializedVersion: 3
-  m_PlayableAsset: {fileID: 11400000, guid: 4b75e5dda89d5e944bd0cca0b885737f, type: 2}
+  m_PlayableAsset: {fileID: 11400000, guid: 029bfe4a78a6d1e42af21147ca6661d8, type: 2}
   m_InitialState: 1
   m_WrapMode: 2
   m_DirectorUpdateMode: 1
@@ -14343,6 +14358,8 @@ PlayableDirector:
     value: {fileID: 1800572534}
   - key: {fileID: -491073074714266003, guid: 4b75e5dda89d5e944bd0cca0b885737f, type: 2}
     value: {fileID: 1800572534}
+  - key: {fileID: 7595737468707270517, guid: 4b75e5dda89d5e944bd0cca0b885737f, type: 2}
+    value: {fileID: 1800572532}
   m_ExposedReferences:
     m_References: []
 --- !u!4 &1952664820

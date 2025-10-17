@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEditor.Animations;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class PlayerController : MonoBehaviour
 {
@@ -188,4 +189,10 @@ public class PlayerController : MonoBehaviour
     {
         noMove = x;
     }
+
+    public void NewScene(int x)
+    {
+        SceneManager.LoadScene(1);
+    }
+
 }
