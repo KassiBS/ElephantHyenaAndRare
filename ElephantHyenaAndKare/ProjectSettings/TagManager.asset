@@ -9,6 +9,7 @@ TagManager:
   - Bird
   - Swim
   - Pickup
+  - Hyena
   layers:
   - Default
   - TransparentFX

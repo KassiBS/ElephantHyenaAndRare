@@ -10,16 +10,19 @@ public class HyenaController : MonoBehaviour
     public bool leftMove = false;
     private bool ground = true;
     private bool noMove = false;
+    private bool noBack = false;
 
     public Rigidbody2D rb;
     public Animator anim;
+    public BoxCollider2D col;
 
     private AudioManager am;
 
     // Start is called before the first frame update
     void Start()
     {
-        am = GetComponentInChildren<AudioManager>();
+        am = GetComponent<AudioManager>();
+        col = GetComponent<BoxCollider2D>();
 
         leftMove = false;
         noMove = false;
@@ -44,13 +47,17 @@ public class HyenaController : MonoBehaviour
                 leftMove = false;
                 anim.SetBool("Walking", true);
             }
-            else if (rb.velocity.x < -1)
+            else if (rb.velocity.x < -1 && noBack == false)
             {
                 am.PlaySFX(am.Stomping);
                 am.SFXSource.pitch = 4;
                 am.SFXSource.volume = 0.05f;
                 leftMove = true;
                 anim.SetBool("Walking", true);
+            }
+            else if (noBack == true)
+            {
+                rb.velocity = new Vector2(0, 0);
             }
             else
             {
@@ -67,6 +74,49 @@ public class HyenaController : MonoBehaviour
         {
             transform.Translate(Vector2.down * Time.deltaTime * 1f);
         }
+    }
+
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (collision.gameObject.CompareTag("Pickup"))
+        {
+            collision.gameObject.SetActive(false);
+        }
+        if (collision.gameObject.tag == "Box" && noMove == false)
+        {
+            noMove = true;
+            moveSpd = 0;
+            rb.velocity = new Vector2(0, 0);
+            rb.constraints = RigidbodyConstraints2D.FreezeAll;
+            col.isTrigger = true;
+            anim.SetBool("Walking", false);
+            anim.Play("Idleh");
+        }
+    }
+
+    private void OnTriggerExit2D(Collider2D collision)
+    {
+        if (collision.CompareTag("Player") && moveSpd == 0)
+        {
+            StartCoroutine(SpeedChang());
+        }
+        else if (collision.CompareTag("Player"))
+        {
+            col.isTrigger = false;
+            moveSpd = 150;
+            rb.constraints = RigidbodyConstraints2D.None;
+            noBack = false;
+            noMove = false;
+        }
+    }
+
+    private IEnumerator SpeedChang()
+    {
+        rb.constraints = RigidbodyConstraints2D.FreezePositionY;
+        yield return new WaitForSecondsRealtime(0.5f);
+        moveSpd = 300;
+        noMove = false;
+        noBack = true;
     }
 
     public void NoMove(bool x)

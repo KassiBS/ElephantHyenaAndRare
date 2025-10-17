@@ -152,11 +152,6 @@ public class PlayerController : MonoBehaviour
         {
             anim.Play("Swim_Idle");
         }
-
-        if (collision.gameObject.CompareTag("Pickup"))
-        {
-           collision.gameObject.SetActive(false);
-        }
     }
 
     public IEnumerator DrinkWater()

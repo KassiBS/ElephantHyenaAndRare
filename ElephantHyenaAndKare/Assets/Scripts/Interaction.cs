@@ -6,10 +6,12 @@ public class Interaction : MonoBehaviour
 {
     private bool z_Interacted = false;
     private PlayerController pc;
+    private HyenaController hc;
 
     private void Start()
     {
         pc = GameObject.FindWithTag("Player").GetComponent<PlayerController>();
+        hc = GameObject.FindWithTag("Hyena").GetComponent<HyenaController>();
         z_Interacted = false;
     }
 
@@ -22,6 +24,14 @@ public class Interaction : MonoBehaviour
         else if (z_Interacted == true && Input.GetKeyDown(KeyCode.Space))
         {
             StartCoroutine(pc.TrunkInteract());
+        }
+        if (collidedObject.CompareTag("Hyena"))
+        {
+            hc.transform.Translate(new Vector2(10, hc.gameObject.transform.position.y)*Time.deltaTime);
+            hc.rb.velocity = new Vector2(0, 0);
+            hc.anim.SetBool("Walking", false);
+            hc.anim.Play("Idleh");
+            hc.NoMove(true);
         }
     }
 
