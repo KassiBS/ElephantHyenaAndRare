@@ -128,7 +128,7 @@ public class PlayerController : MonoBehaviour
         Debug.Log("Collided!" + collision.gameObject.name);
         if (collision.gameObject.tag == "Box")
         {
-            if (rb.velocity.x !< 1 && rb.velocity.x !> -1)
+            if (rb.velocity.x! < 1 && rb.velocity.x! > -1)
             {
                 //Debug.Log("Push Still");
                 anim.SetBool("Push_Walk", true);
@@ -152,12 +152,17 @@ public class PlayerController : MonoBehaviour
         {
             anim.Play("Swim_Idle");
         }
+
+        if (collision.gameObject.CompareTag("Pickup"))
+        {
+           collision.gameObject.SetActive(false);
+        }
     }
 
     public IEnumerator DrinkWater()
     {
         noMove = true;
-        rb.velocity = new Vector2(0,0);
+        rb.velocity = new Vector2(0, 0);
         anim.speed = 1;
         anim.Play("Drinking");
         yield return new WaitForSecondsRealtime(0.4f);
@@ -168,7 +173,7 @@ public class PlayerController : MonoBehaviour
         anim.Play("Idle");
         noMove = false;
         drank = true;
-    nextTrig.Drank();
+        nextTrig.Drank();
     }
 
     public IEnumerator TrunkInteract()
@@ -194,5 +199,6 @@ public class PlayerController : MonoBehaviour
     {
         SceneManager.LoadScene(1);
     }
+
 
 }

@@ -8,6 +8,7 @@ TagManager:
   - Box
   - Bird
   - Swim
+  - Pickup
   layers:
   - Default
   - TransparentFX
