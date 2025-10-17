@@ -17,6 +17,7 @@ public class TreePush : MonoBehaviour
     private Animator animT;
 
     private PlayerController pc;
+    private AudioManager am;
 
     bool noLoop = true;
     bool collided = false;
@@ -24,6 +25,7 @@ public class TreePush : MonoBehaviour
     private void Start()
     {
         //Debug.Log("Start function");
+        am = GameObject.FindFirstObjectByType<AudioManager>();
         pc = GameObject.FindWithTag("Player").GetComponent<PlayerController>();
 
         noLoop = true;
@@ -63,7 +65,11 @@ public class TreePush : MonoBehaviour
     private IEnumerator smoothTransition()
     {
         animT.speed = 1;
-        yield return new WaitForSecondsRealtime(0.75f);
+        yield return new WaitForSecondsRealtime(0.15f);
+        am.PlaySFX(am.Tree);
+        am.SFXSource.pitch = 0.75f;
+        am.SFXSource.volume = 1;
+        yield return new WaitForSecondsRealtime(0.6f);
 
         Debug.Log("Transition");
         if (noLoop == true)
