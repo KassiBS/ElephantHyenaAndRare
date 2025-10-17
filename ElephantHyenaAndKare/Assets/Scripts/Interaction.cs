@@ -18,15 +18,19 @@ public class Interaction : MonoBehaviour
         {
             OnInteract();
         }
+        else if (z_Interacted == true && Input.GetKeyDown(KeyCode.Space))
+        {
+            StartCoroutine(pc.TrunkInteract());
+        }
     }
 
     private void OnInteract()
     {
         if (!z_Interacted)
         {
-            z_Interacted = true;
             Debug.Log("Drink water");
             StartCoroutine(pc.DrinkWater());
+            z_Interacted = true;
         }
     }
 }

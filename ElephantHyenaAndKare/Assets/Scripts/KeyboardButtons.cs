@@ -12,15 +12,12 @@ public class KeyboardButtons : MonoBehaviour
     private Animator animR;
     public List<Animator> animS;
 
-    AudioManager audioManager;
-
+    private PlayerController pc;
 
     // Start is called before the first frame update
     void Start()
-    {
-        audioManager = GameObject.FindGameObjectWithTag("Audio").GetComponent<AudioManager>();
-        audioManager.PlaySFX(audioManager.Stomping);
-        audioManager.SFXSource.Pause();
+    {   
+        pc = GameObject.FindWithTag("Player").GetComponent<PlayerController>();
         animL = arrowL.GetComponent<Animator>();
         animR = arrowR.GetComponent<Animator>();
 
@@ -41,10 +38,6 @@ public class KeyboardButtons : MonoBehaviour
 
             animL.Play("ArrowLeftPress", -1, 0);
             animR.Play("ArrowRightPress", -1, 0);
-
-            audioManager.SFXSource.Pause();
-
-
         }
         else if (Input.GetKeyUp(KeyCode.Space))
         {
@@ -64,7 +57,6 @@ public class KeyboardButtons : MonoBehaviour
             //animS.Play("SpacebarPress", -1, 0);
             animR.speed = 0;
             //animS.speed = 0;
-            audioManager.PlaySFX(audioManager.Stomping);
         }
         else if (Input.GetKey(KeyCode.D) || Input.GetKey(KeyCode.RightArrow))
         {
@@ -75,7 +67,6 @@ public class KeyboardButtons : MonoBehaviour
             //animS.Play("SpacebarPress", -1, 0);
             animL.speed = 0;
             //animS.speed = 0;
-            audioManager.PlaySFX(audioManager.Stomping);
         }
         else if (Input.GetKey(KeyCode.Space))
         {
