@@ -5,6 +5,7 @@ using UnityEngine.SceneManagement;
 
 public class Interaction : MonoBehaviour
 {
+    [SerializeField]
     private bool z_Interacted = false;
     private PlayerController pc;
     private HyenaController hc;
@@ -21,7 +22,7 @@ public class Interaction : MonoBehaviour
 
     private void OnTriggerStay2D(Collider2D collidedObject)
     {
-        if (collidedObject.CompareTag("Player") && Input.GetKey(KeyCode.Space))
+        if (collidedObject.CompareTag("Player") && Input.GetKeyUp(KeyCode.Space))
         {
             OnInteract();
         }
@@ -31,6 +32,7 @@ public class Interaction : MonoBehaviour
         }
         if (collidedObject.CompareTag("Hyena"))
         {
+            Physics2D.IgnoreCollision(hc.GetComponent<Collider2D>(), pc.GetComponent<Collider2D>(), true);
             hc.transform.Translate(new Vector2(10, hc.gameObject.transform.position.y)*Time.deltaTime);
             hc.rb.velocity = new Vector2(0, 0);
             hc.anim.SetBool("Walking", false);

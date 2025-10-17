@@ -16,7 +16,7 @@ public class NextCutscene : MonoBehaviour
 
     private GameObject speechbubble;
     private SpriteRenderer toChang;
-    public List<Sprite> icons;
+    public Sprite icons;
 
     private bool trigStay;
     private bool birdLeave;
@@ -81,7 +81,7 @@ public class NextCutscene : MonoBehaviour
         {
             Debug.Log("You need to drink");
             speechbubble.SetActive(true);
-            toChang.sprite = icons[0];
+            toChang.sprite = icons;
         }
     }
 

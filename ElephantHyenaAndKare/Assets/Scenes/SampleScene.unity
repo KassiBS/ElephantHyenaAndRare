@@ -2881,9 +2881,7 @@ MonoBehaviour:
   trigger: {fileID: 1245929027}
   scenePlayer: {fileID: 1952664819}
   curScene: 0
-  icons:
-  - {fileID: -5788597393437692957, guid: 63f2e5ae2909d8943ac92cb1a77b8cd6, type: 3}
-  - {fileID: 0}
+  icons: {fileID: -5788597393437692957, guid: 63f2e5ae2909d8943ac92cb1a77b8cd6, type: 3}
 --- !u!1 &1269862114
 GameObject:
   m_ObjectHideFlags: 0
@@ -14477,7 +14475,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1712324465
 Transform:
   m_ObjectHideFlags: 0
@@ -14847,6 +14845,8 @@ MonoBehaviour:
   camCol: {fileID: 205199787}
   capCol: {fileID: 1269862119}
   nextTrig: {fileID: 1245929028}
+  scenePlayer: {fileID: 0}
+  cutScene: {fileID: 0}
 --- !u!212 &1800572527
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -15948,7 +15948,7 @@ PlayableDirector:
   m_GameObject: {fileID: 1952664818}
   m_Enabled: 1
   serializedVersion: 3
-  m_PlayableAsset: {fileID: 11400000, guid: 4b75e5dda89d5e944bd0cca0b885737f, type: 2}
+  m_PlayableAsset: {fileID: 11400000, guid: 393c849144cb14e4ebf8b64b31f249ac, type: 2}
   m_InitialState: 1
   m_WrapMode: 2
   m_DirectorUpdateMode: 1
@@ -16008,6 +16008,8 @@ PlayableDirector:
     value: {fileID: 1215898650}
   - key: {fileID: -7599191348745093065, guid: 4b75e5dda89d5e944bd0cca0b885737f, type: 2}
     value: {fileID: 1800572532}
+  - key: {fileID: 3730739951491417681, guid: 4b75e5dda89d5e944bd0cca0b885737f, type: 2}
+    value: {fileID: 1245929025}
   m_ExposedReferences:
     m_References: []
 --- !u!4 &1952664820

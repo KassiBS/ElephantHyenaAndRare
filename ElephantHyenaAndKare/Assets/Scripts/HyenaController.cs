@@ -1,7 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
-using UnityEditor.Animations;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class HyenaController : MonoBehaviour
 {
@@ -11,18 +11,29 @@ public class HyenaController : MonoBehaviour
     private bool ground = true;
     private bool noMove = false;
     private bool noBack = false;
+    float curAlpha;
 
     public Rigidbody2D rb;
     public Animator anim;
     public BoxCollider2D col;
+    public SpriteRenderer heart;
 
     private AudioManager am;
+    private PlayerController pc;
 
     // Start is called before the first frame update
     void Start()
     {
         am = GetComponent<AudioManager>();
         col = GetComponent<BoxCollider2D>();
+        pc = FindFirstObjectByType<PlayerController>();
+
+        if (SceneManager.GetActiveScene().buildIndex == 1)
+        {
+            heart = transform.GetChild(0).gameObject.GetComponent<SpriteRenderer>();
+            curAlpha = heart.color.a;
+            heart.color = new Color(255, 255, 255, 0);
+        }
 
         leftMove = false;
         noMove = false;
@@ -65,10 +76,10 @@ public class HyenaController : MonoBehaviour
                 anim.SetBool("Walking", false);
             }
 
-            GetComponent<SpriteRenderer>().flipX = leftMove;
-
             move = Input.GetAxisRaw("Horizontal") * Time.deltaTime;
         }
+
+        GetComponent<SpriteRenderer>().flipX = leftMove;
 
         if (ground == false)
         {
@@ -80,7 +91,7 @@ public class HyenaController : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Pickup"))
         {
-            collision.gameObject.SetActive(false);
+            StartCoroutine(BackEllie());
             if (collision.gameObject.transform.localScale.x == 5)
             {
                 am.PlaySFX(am.HyenaLaugh);
@@ -93,11 +104,15 @@ public class HyenaController : MonoBehaviour
                 am.SFXSource.pitch = 1;
                 am.SFXSource.volume = 0.1f;
             }
+            collision.gameObject.SetActive(false);
+        }
+        if (collision.gameObject.name == "Poo")
+        {
+            SceneManager.LoadScene(2);
         }
         if (collision.gameObject.tag == "Box" && noMove == false)
         {
             noMove = true;
-            moveSpd = 0;
             rb.velocity = new Vector2(0, 0);
             rb.constraints = RigidbodyConstraints2D.FreezeAll;
             col.isTrigger = true;
@@ -113,29 +128,43 @@ public class HyenaController : MonoBehaviour
         }
     }
 
-    private void OnTriggerExit2D(Collider2D collision)
-    {
-        if (collision.CompareTag("Player") && moveSpd == 0)
-        {
-            StartCoroutine(SpeedChang());
-        }
-        else if (collision.CompareTag("Player"))
-        {
-            col.isTrigger = false;
-            moveSpd = 150;
-            rb.constraints = RigidbodyConstraints2D.None;
-            noBack = false;
-            noMove = false;
-        }
-    }
-
-    private IEnumerator SpeedChang()
+    public IEnumerator SpeedChang()
     {
         rb.constraints = RigidbodyConstraints2D.FreezePositionY;
         yield return new WaitForSecondsRealtime(0.5f);
-        moveSpd = 300;
+        while (transform.position.x < 5 + pc.transform.position.x)
+        {
+            moveSpd = 300;
+            noMove = false;
+            noBack = true;
+            rb.velocity = new Vector2(1 * moveSpd, Mathf.Clamp(rb.velocity.y, -10000, 0));
+            yield return new WaitForSecondsRealtime(0.001f);
+        }
+        col.isTrigger = false;
+        moveSpd = 150;
+        rb.constraints = RigidbodyConstraints2D.None;
+        noBack = false;
         noMove = false;
-        noBack = true;
+    }
+
+    private IEnumerator BackEllie()
+    {
+        Debug.Log(curAlpha);
+        while (curAlpha < 1)
+        {
+            curAlpha += 0.1f;
+            heart.color = new Color(255, 255, 255, curAlpha);
+
+            yield return new WaitForSeconds(0.005f); // update interval
+        }
+        yield return new WaitForSeconds(1f);
+        while (curAlpha > 0)
+        {
+            curAlpha -= 0.1f;
+            heart.color = new Color(255, 255, 255, curAlpha);
+
+            yield return new WaitForSeconds(0.005f); // update interval
+        }
     }
 
     public void NoMove(bool x)

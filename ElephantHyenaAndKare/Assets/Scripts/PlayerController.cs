@@ -1,6 +1,5 @@
 using System.Collections;
 using System.Collections.Generic;
-using UnityEditor.Animations;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.Timeline;
@@ -125,7 +124,7 @@ public class PlayerController : MonoBehaviour
             move = Input.GetAxisRaw("Horizontal") * Time.deltaTime;
         }
 
-        if (Input.GetKey(KeyCode.Space) && drank == true)
+        if (Input.GetKeyDown(KeyCode.Space) && drank == true)
         {
             StartCoroutine(TrunkInteract());
         }
@@ -179,19 +178,15 @@ public class PlayerController : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if (collision.gameObject.tag == "Swim")
-        {
-            swim = true;
-            anim.Play("Swim_Idle");
-        }
-        if (collision.gameObject.name == "Poo")
-        {
-            NewScene(2);
-        }
         if (collision.gameObject.name == "EndScene")
         {
             scenePlayer.playableAsset = cutScene;
             scenePlayer.Play();
+        }
+        if (collision.gameObject.CompareTag("Swim"))
+        {
+            swim = true;
+            anim.Play("Swim_Idle");
         }
     }
 
@@ -206,7 +201,14 @@ public class PlayerController : MonoBehaviour
         am.SFXSource.pitch = 0.75f;
         am.SFXSource.volume = 0.5f;
         yield return new WaitForSecondsRealtime(1.5f);
-        anim.Play("Idle");
+        if (swim == false)
+        {
+            anim.Play("Idle");
+        }
+        else
+        {
+            anim.Play("Swim_Idle");
+        }
         noMove = false;
         drank = true;
         nextTrig.Drank();
@@ -222,7 +224,14 @@ public class PlayerController : MonoBehaviour
         am.SFXSource.volume = 0.1f;
         anim.Play("Interact");
         yield return new WaitForSecondsRealtime(0.69f);
-        anim.Play("Idle");
+        if (swim == false)
+        {
+            anim.Play("Idle");
+        }
+        else
+        {
+            anim.Play("Swim_Idle");
+        }
         noMove = false;
     }
 
