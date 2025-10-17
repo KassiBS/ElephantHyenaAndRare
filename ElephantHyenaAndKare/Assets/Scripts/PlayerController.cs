@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using UnityEditor.Animations;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.Timeline;
+using UnityEngine.Playables;
 
 public class PlayerController : MonoBehaviour
 {
@@ -25,6 +27,10 @@ public class PlayerController : MonoBehaviour
     private bool tree;
     private bool drink;
 
+    [SerializeField]
+    private PlayableDirector scenePlayer;
+    public TimelineAsset cutScene;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -43,6 +49,8 @@ public class PlayerController : MonoBehaviour
         camCol = transform.GetChild(0).GetComponent<BoxCollider2D>();
         capCol = GameObject.FindWithTag("Box").GetComponent<CapsuleCollider2D>();
         Physics2D.IgnoreCollision(camCol, capCol, true);
+
+        scenePlayer = FindFirstObjectByType<PlayableDirector>();
 
         drank = false;
     }
@@ -176,6 +184,15 @@ public class PlayerController : MonoBehaviour
             swim = true;
             anim.Play("Swim_Idle");
         }
+        if (collision.gameObject.name == "Poo")
+        {
+            NewScene(2);
+        }
+        if (collision.gameObject.name == "EndScene")
+        {
+            scenePlayer.playableAsset = cutScene;
+            scenePlayer.Play();
+        }
     }
 
     public IEnumerator DrinkWater()
@@ -216,7 +233,7 @@ public class PlayerController : MonoBehaviour
 
     public void NewScene(int x)
     {
-        SceneManager.LoadScene(1);
+        SceneManager.LoadScene(x);
     }
 
 
