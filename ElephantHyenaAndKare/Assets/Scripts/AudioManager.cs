@@ -6,6 +6,7 @@ public class AudioManager : MonoBehaviour
 {
     [Header(" Audio Source ")]
     public AudioSource SFXSource;
+    public AudioSource SS2;
 
     [Header(" Audio Clip ")]
     public AudioClip Bird;
@@ -21,6 +22,7 @@ public class AudioManager : MonoBehaviour
     public AudioClip Stomping;
     public AudioClip Thump;
     public AudioClip Whip;
+    public AudioClip Swim;
 
     public void PlaySFX(AudioClip clip)
     {
@@ -28,6 +30,15 @@ public class AudioManager : MonoBehaviour
         {
             SFXSource.clip = clip;
             SFXSource.Play();
+        }
+    }
+
+    public void PlaySFX2(AudioClip clip)
+    {
+        if (SS2.clip != clip)
+        {
+            SS2.clip = clip;
+            SS2.Play();
         }
     }
 }

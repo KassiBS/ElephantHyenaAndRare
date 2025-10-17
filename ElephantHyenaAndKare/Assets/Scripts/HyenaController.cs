@@ -81,6 +81,18 @@ public class HyenaController : MonoBehaviour
         if (collision.gameObject.CompareTag("Pickup"))
         {
             collision.gameObject.SetActive(false);
+            if (collision.gameObject.transform.localScale.x == 5)
+            {
+                am.PlaySFX(am.HyenaLaugh);
+                am.SFXSource.pitch = 1;
+                am.SFXSource.volume = 0.25f;
+            }
+            else
+            {
+                am.PlaySFX(am.HyenaLaugh);
+                am.SFXSource.pitch = 1;
+                am.SFXSource.volume = 0.1f;
+            }
         }
         if (collision.gameObject.tag == "Box" && noMove == false)
         {
@@ -91,6 +103,13 @@ public class HyenaController : MonoBehaviour
             col.isTrigger = true;
             anim.SetBool("Walking", false);
             anim.Play("Idleh");
+            am.PlaySFX(am.HyenaWhine);
+            am.SFXSource.pitch = 1;
+            am.SFXSource.volume = 0.2f;
+        }
+        if (collision.gameObject.CompareTag("Player"))
+        {
+            noMove = false;
         }
     }
 

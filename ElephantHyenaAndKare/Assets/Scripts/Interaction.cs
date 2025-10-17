@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class Interaction : MonoBehaviour
 {
@@ -11,7 +12,10 @@ public class Interaction : MonoBehaviour
     private void Start()
     {
         pc = GameObject.FindWithTag("Player").GetComponent<PlayerController>();
-        hc = GameObject.FindWithTag("Hyena").GetComponent<HyenaController>();
+        if (SceneManager.GetActiveScene().buildIndex != 0)
+        {
+            hc = GameObject.FindWithTag("Hyena").GetComponent<HyenaController>();
+        }
         z_Interacted = false;
     }
 

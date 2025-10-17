@@ -21,7 +21,7 @@ public class PlayerController : MonoBehaviour
 
     private AudioManager am;
     private bool swim;
-    private bool interact;
+    private bool rock;
     private bool tree;
     private bool drink;
 
@@ -55,9 +55,19 @@ public class PlayerController : MonoBehaviour
             anim.speed = 1;
             if (rb.velocity.x > 1)
             {
-                am.PlaySFX(am.Stomping);
-                am.SFXSource.pitch = 2;
-                am.SFXSource.volume = 0.25f;
+                if (swim == true)
+                {
+                    am.PlaySFX(am.Swim);
+                    am.SFXSource.pitch = 1;
+                    am.SFXSource.volume = 0.25f;
+                }
+                else if (rock == false)
+                {
+                    am.PlaySFX(am.Stomping);
+                    am.SFXSource.pitch = 2;
+                    am.SFXSource.volume = 0.25f;
+                }
+
                 leftMove = false;
                 if (anim.GetBool("Push_Walk") == false)
                 {
@@ -71,9 +81,19 @@ public class PlayerController : MonoBehaviour
             }
             else if (rb.velocity.x < -1)
             {
-                am.PlaySFX(am.Stomping);
-                am.SFXSource.pitch = 2;
-                am.SFXSource.volume = 0.25f;
+                if (swim == true)
+                {
+                    am.PlaySFX(am.Swim);
+                    am.SFXSource.pitch = 1;
+                    am.SFXSource.volume = 0.25f;
+                }
+                else if (rock == false)
+                {
+                    am.PlaySFX(am.Stomping);
+                    am.SFXSource.pitch = 2;
+                    am.SFXSource.volume = 0.25f;
+                }
+
                 leftMove = true;
                 if (anim.GetBool("Push_Walk") == false)
                 {
@@ -114,11 +134,13 @@ public class PlayerController : MonoBehaviour
         if (collision.gameObject.tag == "Box")
         {
             //Debug.Log("NoPush");
+            rock = false;
             anim.SetBool("Push_Walk", false);
             anim.speed = 1;
         }
         if (collision.gameObject.tag == "Swim")
         {
+            swim = false;
             anim.Play("Idle");
         }
     }
@@ -137,6 +159,7 @@ public class PlayerController : MonoBehaviour
             else
             {
                 //Debug.Log("Push Move");
+                rock = true;
                 am.PlaySFX(am.Rock);
                 am.SFXSource.pitch = 1;
                 am.SFXSource.volume = 1;
@@ -150,6 +173,7 @@ public class PlayerController : MonoBehaviour
     {
         if (collision.gameObject.tag == "Swim")
         {
+            swim = true;
             anim.Play("Swim_Idle");
         }
     }
