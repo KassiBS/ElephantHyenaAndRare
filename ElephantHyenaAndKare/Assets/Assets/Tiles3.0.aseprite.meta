@@ -206,7 +206,7 @@ ScriptedImporter:
       - {x: -16, y: -16}
       - {x: 16, y: -16}
       - {x: 16, y: 12}
-      - {x: 10, y: 12}
+      - {x: 16, y: 16}
       - {x: 10, y: 16}
     indices: 
     edges: []
@@ -335,7 +335,7 @@ ScriptedImporter:
     spritePhysicsOutline:
     - outline:
       - {x: -10, y: 16}
-      - {x: -10, y: 11}
+      - {x: -16, y: 16}
       - {x: -16, y: 11}
       - {x: -16, y: -16}
       - {x: 16, y: -16}

@@ -34,10 +34,20 @@ public class Interaction : MonoBehaviour
         {
             Physics2D.IgnoreCollision(hc.GetComponent<Collider2D>(), pc.GetComponent<Collider2D>(), true);
             hc.transform.Translate(new Vector2(10, hc.gameObject.transform.position.y)*Time.deltaTime);
+        }
+    }
+    private void OnTriggerExit2D(Collider2D collision)
+    {
+        if (collision.CompareTag("Hyena"))
+        {
             hc.rb.velocity = new Vector2(0, 0);
             hc.anim.SetBool("Walking", false);
             hc.anim.Play("Idleh");
             hc.NoMove(true);
+            if (SceneManager.GetActiveScene().buildIndex != 2)
+            {
+                Physics2D.IgnoreCollision(hc.GetComponent<Collider2D>(), pc.GetComponent<Collider2D>(), false);
+            }
         }
     }
 

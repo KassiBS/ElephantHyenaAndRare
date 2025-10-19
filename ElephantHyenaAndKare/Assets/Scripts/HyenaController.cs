@@ -68,7 +68,7 @@ public class HyenaController : MonoBehaviour
             }
             else if (noBack == true)
             {
-                rb.velocity = new Vector2(0, 0);
+                rb.velocity = new Vector2(Mathf.Abs(rb.velocity.x), rb.velocity.y);
             }
             else
             {
@@ -92,18 +92,6 @@ public class HyenaController : MonoBehaviour
         if (collision.gameObject.CompareTag("Pickup"))
         {
             StartCoroutine(BackEllie());
-            if (collision.gameObject.transform.localScale.x == 5)
-            {
-                am.PlaySFX(am.HyenaLaugh);
-                am.SFXSource.pitch = 1;
-                am.SFXSource.volume = 0.25f;
-            }
-            else
-            {
-                am.PlaySFX(am.HyenaLaugh);
-                am.SFXSource.pitch = 1;
-                am.SFXSource.volume = 0.1f;
-            }
             collision.gameObject.SetActive(false);
         }
         if (collision.gameObject.name == "Poo")
@@ -127,12 +115,32 @@ public class HyenaController : MonoBehaviour
             noMove = false;
         }
     }
+    private void OnCollisionStay2D(Collision2D collision)
+    {
+        if (collision.gameObject.CompareTag("Rotate"))
+        {
+            //Debug.Log(this.gameObject.name + " collided with " + collision.gameObject.name);
+            rb.rotation = 0;
+            rb.constraints = RigidbodyConstraints2D.FreezeRotation;
+        }
+    }
+    private void OnCollisionExit2D(Collision2D collision)
+    {
+        if (collision.gameObject.CompareTag("Rotate"))
+        {
+            rb.constraints = RigidbodyConstraints2D.None;
+        }
+    }
 
     public IEnumerator SpeedChang()
     {
         rb.constraints = RigidbodyConstraints2D.FreezePositionY;
+        StartCoroutine(BackEllie());
+        pc.NoMove(true);
+        pc.rb.velocity = Vector2.zero;
+        pc.anim.SetBool("Walking", false);
         yield return new WaitForSecondsRealtime(0.5f);
-        while (transform.position.x < 5 + pc.transform.position.x)
+        while (transform.position.x < 3 + pc.transform.position.x)
         {
             moveSpd = 300;
             noMove = false;
@@ -140,6 +148,7 @@ public class HyenaController : MonoBehaviour
             rb.velocity = new Vector2(1 * moveSpd, Mathf.Clamp(rb.velocity.y, -10000, 0));
             yield return new WaitForSecondsRealtime(0.001f);
         }
+        pc.NoMove(false);
         col.isTrigger = false;
         moveSpd = 150;
         rb.constraints = RigidbodyConstraints2D.None;
@@ -147,9 +156,12 @@ public class HyenaController : MonoBehaviour
         noMove = false;
     }
 
-    private IEnumerator BackEllie()
+    public IEnumerator BackEllie()
     {
-        Debug.Log(curAlpha);
+        am.PlaySFX(am.HyenaLaugh);
+        am.SFXSource.pitch = 1;
+        am.SFXSource.volume = 0.25f;
+
         while (curAlpha < 1)
         {
             curAlpha += 0.1f;

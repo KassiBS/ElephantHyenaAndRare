@@ -155,7 +155,12 @@ ScriptedImporter:
     spriteBone: []
     spriteOutline: []
     vertices: []
-    spritePhysicsOutline: []
+    spritePhysicsOutline:
+    - outline:
+      - {x: -16, y: 16}
+      - {x: -16, y: -16}
+      - {x: 16, y: -16}
+      - {x: 16, y: 16}
     indices: 
     edges: []
     tessellationDetail: 0
@@ -175,7 +180,12 @@ ScriptedImporter:
     spriteBone: []
     spriteOutline: []
     vertices: []
-    spritePhysicsOutline: []
+    spritePhysicsOutline:
+    - outline:
+      - {x: -16, y: 16}
+      - {x: -16, y: -16}
+      - {x: 16, y: -16}
+      - {x: 16, y: 16}
     indices: 
     edges: []
     tessellationDetail: 0
@@ -489,7 +499,7 @@ ScriptedImporter:
     originalName: 
     pivot: {x: 0.5, y: 0.5}
     alignment: 0
-    border: {x: 0, y: 1, z: 0, w: 0}
+    border: {x: 0, y: 0, z: 0, w: 0}
     rect:
       serializedVersion: 2
       x: 100
@@ -502,10 +512,10 @@ ScriptedImporter:
     vertices: []
     spritePhysicsOutline:
     - outline:
-      - {x: -16, y: -15}
-      - {x: -16, y: -15}
+      - {x: -16, y: -16}
+      - {x: -16, y: -16}
       - {x: 16, y: -5}
-      - {x: 16, y: -15}
+      - {x: 16, y: -16}
     indices: 
     edges: []
     tessellationDetail: 0

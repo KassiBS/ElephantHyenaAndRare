@@ -3,7 +3,23 @@ guid: 8c9fa138f0131b141ba806d2361401e3
 MonoImporter:
   externalObjects: {}
   serializedVersion: 2
-  defaultReferences: []
+  defaultReferences:
+  - SFXSource: {instanceID: 0}
+  - SS2: {instanceID: 0}
+  - Bird: {fileID: 8300000, guid: e3abfb28e1066a3439851d2909a2534a, type: 3}
+  - WoodCreaking: {fileID: 8300000, guid: 925807f1c7dd1c84b9864af1b288b0a1, type: 3}
+  - Wind: {fileID: 8300000, guid: 0b631b2232c9f3c49a295e04ecc479a0, type: 3}
+  - Drink: {fileID: 8300000, guid: 1ae4330c0f399544689733fc87fa0d52, type: 3}
+  - ElephantLL: {fileID: 8300000, guid: b66b012a8f558104bb5fa305761b4341, type: 3}
+  - ElephantLo: {fileID: 8300000, guid: 44d1d553bbb4354468fe17d7615e49b1, type: 3}
+  - Tree: {fileID: 8300000, guid: 48156b1a134f3a442adbddb4a7c13b15, type: 3}
+  - HyenaLaugh: {fileID: 8300000, guid: 8c10383216347c349b223d16c745f3c7, type: 3}
+  - HyenaWhine: {fileID: 8300000, guid: 19ef82c73a1fc974bb4a8ab46bdc4874, type: 3}
+  - Rock: {fileID: 8300000, guid: e2c949615fb83cc439c9160b8dc5c1ba, type: 3}
+  - Stomping: {fileID: 8300000, guid: cdf8d8580bd10eb4bb48f1cf2972c8d2, type: 3}
+  - Thump: {fileID: 8300000, guid: a9f2f97d2a221b24aacac81495920b69, type: 3}
+  - Whip: {fileID: 8300000, guid: f9b95a3a8b7457549994977161aa64e5, type: 3}
+  - Swim: {fileID: 8300000, guid: ac3e074e8d9cf0c44a2b35b1964539aa, type: 3}
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 

@@ -25,10 +25,12 @@ public class PlayerController : MonoBehaviour
     private bool rock;
     private bool tree;
     private bool drink;
+    private int nextScene = 0;
 
     [SerializeField]
     private PlayableDirector scenePlayer;
     public TimelineAsset cutScene;
+    private HyenaController hc;
 
     // Start is called before the first frame update
     void Start()
@@ -52,6 +54,12 @@ public class PlayerController : MonoBehaviour
         scenePlayer = FindFirstObjectByType<PlayableDirector>();
 
         drank = false;
+
+        nextScene = SceneManager.GetActiveScene().buildIndex + 1;
+        if (SceneManager.GetActiveScene().buildIndex != 0)
+        {
+            hc = GameObject.FindWithTag("Hyena").GetComponent<HyenaController>();
+        }
     }
 
     private void FixedUpdate()
@@ -137,7 +145,10 @@ public class PlayerController : MonoBehaviour
 
     private void OnCollisionExit2D(Collision2D collision)
     {
-        ground = false;
+        if (collision.gameObject.CompareTag("Rotate"))
+        {
+            rb.constraints = RigidbodyConstraints2D.None;
+        }
         if (collision.gameObject.tag == "Box")
         {
             //Debug.Log("NoPush");
@@ -155,6 +166,11 @@ public class PlayerController : MonoBehaviour
     {
         ground = true;
         Debug.Log("Collided!" + collision.gameObject.name);
+        if (collision.gameObject.CompareTag("Rotate"))
+        {
+            rb.rotation = 0;
+            rb.constraints = RigidbodyConstraints2D.FreezeRotation;
+        }
         if (collision.gameObject.tag == "Box")
         {
             if (rb.velocity.x! < 1 && rb.velocity.x! > -1)
@@ -175,7 +191,6 @@ public class PlayerController : MonoBehaviour
             }
         }
     }
-
     private void OnCollisionEnter2D(Collision2D collision)
     {
         if (collision.gameObject.name == "EndScene")
@@ -187,6 +202,19 @@ public class PlayerController : MonoBehaviour
         {
             swim = true;
             anim.Play("Swim_Idle");
+        }
+        if (collision.transform.position.x > this.transform.position.x && collision.gameObject.CompareTag("Bounds"))
+        {
+            SceneManager.LoadScene(nextScene);
+        }
+        if (collision.gameObject.CompareTag("Pickup"))
+        {
+            StartCoroutine(hc.BackEllie());
+            collision.gameObject.SetActive(false);
+        }
+        if (collision.gameObject.name == "Poo")
+        {
+            SceneManager.LoadScene(nextScene);
         }
     }
 
