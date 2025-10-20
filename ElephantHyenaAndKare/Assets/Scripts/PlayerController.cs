@@ -10,9 +10,8 @@ public class PlayerController : MonoBehaviour
     public float moveSpd = 150;
     float move;
     public bool leftMove = false;
-    private bool ground = true;
     private bool noMove = false;
-    private bool drank = false;
+    public bool canDrink = false;
 
     public Rigidbody2D rb;
     public Animator anim;
@@ -53,7 +52,7 @@ public class PlayerController : MonoBehaviour
 
         scenePlayer = FindFirstObjectByType<PlayableDirector>();
 
-        drank = false;
+        canDrink = false;
 
         nextScene = SceneManager.GetActiveScene().buildIndex + 1;
         if (SceneManager.GetActiveScene().buildIndex != 0)
@@ -68,6 +67,12 @@ public class PlayerController : MonoBehaviour
         {
             rb.velocity = new Vector2(move * moveSpd, Mathf.Clamp(rb.velocity.y, -10000, 0));
             anim.speed = 1;
+
+            if (Input.GetKeyDown(KeyCode.Space) && canDrink == false)
+            {
+                StartCoroutine(TrunkInteract());
+            }
+
             if (rb.velocity.x > 1)
             {
                 if (swim == true)
@@ -91,7 +96,6 @@ public class PlayerController : MonoBehaviour
                 else
                 {
                     anim.SetBool("Walking", false);
-                    anim.SetBool("Push_Walk", true);
                 }
             }
             else if (rb.velocity.x < -1)
@@ -117,7 +121,6 @@ public class PlayerController : MonoBehaviour
                 else
                 {
                     anim.SetBool("Walking", false);
-                    anim.SetBool("Push_Walk", true);
                 }
             }
             else
@@ -130,16 +133,6 @@ public class PlayerController : MonoBehaviour
             GetComponent<SpriteRenderer>().flipX = leftMove;
 
             move = Input.GetAxisRaw("Horizontal") * Time.deltaTime;
-        }
-
-        if (Input.GetKeyDown(KeyCode.Space) && drank == true)
-        {
-            StartCoroutine(TrunkInteract());
-        }
-
-        if (ground == false)
-        {
-            transform.Translate(Vector2.down * Time.deltaTime * 1f);
         }
     }
 
@@ -164,7 +157,6 @@ public class PlayerController : MonoBehaviour
     }
     private void OnCollisionStay2D(Collision2D collision)
     {
-        ground = true;
         Debug.Log("Collided!" + collision.gameObject.name);
         if (collision.gameObject.CompareTag("Rotate"))
         {
@@ -238,7 +230,7 @@ public class PlayerController : MonoBehaviour
             anim.Play("Swim_Idle");
         }
         noMove = false;
-        drank = true;
+        canDrink = false;
         nextTrig.Drank();
     }
 
@@ -247,11 +239,12 @@ public class PlayerController : MonoBehaviour
         noMove = true;
         rb.velocity = new Vector2(0, 0);
         anim.speed = 1;
-        am.PlaySFX(am.Thump);
+        am.PlaySFX2(am.Thump);
         am.SFXSource.pitch = 0.8f;
-        am.SFXSource.volume = 0.1f;
+        am.SFXSource.volume = 0.5f;
         anim.Play("Interact");
         yield return new WaitForSecondsRealtime(0.69f);
+        am.PlaySFX2(null);
         if (swim == false)
         {
             anim.Play("Idle");

@@ -20,16 +20,24 @@ public class Interaction : MonoBehaviour
         z_Interacted = false;
     }
 
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.CompareTag("Player"))
+        {
+            pc.canDrink = true;
+        }
+    }
+
     private void OnTriggerStay2D(Collider2D collidedObject)
     {
-        if (collidedObject.CompareTag("Player") && Input.GetKeyUp(KeyCode.Space))
+        if (collidedObject.CompareTag("Player") && Input.GetKeyDown(KeyCode.Space) && z_Interacted == false)
         {
             OnInteract();
         }
-        else if (z_Interacted == true && Input.GetKeyDown(KeyCode.Space))
+        /*else if (z_Interacted == true && Input.GetKeyDown(KeyCode.Space))
         {
             StartCoroutine(pc.TrunkInteract());
-        }
+        }*/
         if (collidedObject.CompareTag("Hyena"))
         {
             Physics2D.IgnoreCollision(hc.GetComponent<Collider2D>(), pc.GetComponent<Collider2D>(), true);
@@ -38,6 +46,10 @@ public class Interaction : MonoBehaviour
     }
     private void OnTriggerExit2D(Collider2D collision)
     {
+        if (collision.CompareTag("Player"))
+        {
+            pc.canDrink = false;
+        }
         if (collision.CompareTag("Hyena"))
         {
             hc.rb.velocity = new Vector2(0, 0);
