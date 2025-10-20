@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class Obstacles : MonoBehaviour
 {
@@ -10,9 +11,11 @@ public class Obstacles : MonoBehaviour
     private CapsuleCollider2D box;
     [SerializeField]
     private Rigidbody2D rbB;
+    private HyenaController hc;
 
     private void Start()
     {
+        hc = FindFirstObjectByType<HyenaController>();
         fillCol = GetComponent<BoxCollider2D>();
         box = transform.GetChild(0).GetComponent<CapsuleCollider2D>();
         rbB = box.gameObject.GetComponent<Rigidbody2D>();
@@ -30,9 +33,15 @@ public class Obstacles : MonoBehaviour
     {
         if (other.CompareTag("Box"))
         {
+            Debug.Log("Gwrrr");
             rbB.constraints = RigidbodyConstraints2D.FreezeAll;
             other.isTrigger = true;
             fillCol.enabled = true;
+            if (SceneManager.GetActiveScene().buildIndex == 1)
+            {
+                Debug.Log("WAHHHH");
+                StartCoroutine(hc.SpeedChang());
+            }
         }
     }
 }
